@@ -1,0 +1,5 @@
+az bicep build --file bicep-templates/main.bicep
+
+az deployment sub create --location westeurope --template-file bicep-templates/main.json
+
+az group delete --name onBoardingResourceGroup --yes
