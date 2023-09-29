@@ -1,5 +1,29 @@
+# convert bicep template to ARM
 az bicep build --file bicep-templates/main.bicep
 
+# execute bicep file
 az deployment sub create --location westeurope --template-file bicep-templates/main.json
 
+# Create App Service,  App Service Plan 
+
+az appservice plan create --name onBoardingPlan3834 --resource-group onBoardingResourceGroup --sku B1 --is-linux
+az webapp create --resource-group onBoardingResourceGroup --plan onBoardingPlan3834 --name onBoardingAssignmentApp3834 --runtime PYTHON:3.9
+
+# set env
+az webapp config appsettings set --name onBoardingAssignmentApp3834 --resource-group onBoardingResourceGroup --settings SQL_SERVER_NAME=hvaonboardingsqlserver.database.windows.net SQL_DATABASE_NAME=onBoardingDatabase SQL_ADMIN_LOGIN=wjdgml3834 SQL_ADMIN_PASSWORD=wjdgml@23
+
+
+
+# Deploy Azure App service
+az webapp up --sku B1 --name onBoardingAssignmentApp3834 --location westeurope --resource-group onBoardingResourceGroup --runtime PYTHON:3.9 
+
+# delete resource group
 az group delete --name onBoardingResourceGroup --yes
+
+
+
+# delete wepApp
+
+az webapp delete --name onBoardingAssignmentApp3834 --resource-group onBoardingResourceGroup
+
+# url
