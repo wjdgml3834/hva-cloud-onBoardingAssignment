@@ -6,3 +6,4 @@ pyvenv.cfg
 pip-selfcheck.json
 .vscode
 .env
+/cli/command_line.azcli
